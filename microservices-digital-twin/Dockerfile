@@ -1,4 +1,4 @@
-FROM maven:3.8.1-jdk-11
+FROM maven:3.9-eclipse-temurin-11
 
 ENV MAVEN_OPTS -Xms16m -Xmx64m
 
