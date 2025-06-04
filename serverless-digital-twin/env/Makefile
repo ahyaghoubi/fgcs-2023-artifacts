@@ -3,15 +3,15 @@
 .PHONY: all
 all: python-builder python-env-img python-env-3.7-img python-env-3.8-img python-env-3.9-img python-env-3.10-img
 
-python-env-img-buildargs := --build-arg PY_BASE_IMG=3.7-alpine
+python-env-img-buildargs := --build-arg PY_BASE_IMG=python:3.7.17-alpine
 
-python-env-3.7-img-buildargs := --build-arg PY_BASE_IMG=3.7-alpine
+python-env-3.7-img-buildargs := --build-arg PY_BASE_IMG=python:3.7.17-alpine
 
-python-env-3.8-img-buildargs := --build-arg PY_BASE_IMG=3.8-alpine
+python-env-3.8-img-buildargs := --build-arg PY_BASE_IMG=python:3.8.19-alpine
 
-python-env-3.9-img-buildargs := --build-arg PY_BASE_IMG=3.9-alpine
+python-env-3.9-img-buildargs := --build-arg PY_BASE_IMG=python:3.9.19-alpine
 
-python-env-3.10-img-buildargs := --build-arg PY_BASE_IMG=3.10-alpine
+python-env-3.10-img-buildargs := --build-arg PY_BASE_IMG=python:3.10.14-alpine
 
 python-env-img: Dockerfile
 
