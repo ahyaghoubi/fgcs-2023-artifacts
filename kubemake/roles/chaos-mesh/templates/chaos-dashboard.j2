@@ -1,4 +1,4 @@
-apiVersion: networking.istio.io/v1alpha3
+apiVersion: networking.istio.io/v1
 kind: Gateway
 metadata:
   name: chaos-dashboard-gateway
@@ -14,7 +14,7 @@ spec:
     hosts:
     - "chaos.{{ istio_ingress_domain }}"
 ---
-apiVersion: networking.istio.io/v1alpha3
+apiVersion: networking.istio.io/v1
 kind: VirtualService
 metadata:
   name: chaos-dashboard-vs
@@ -31,7 +31,7 @@ spec:
         port:
           number: 2333
 ---
-apiVersion: networking.istio.io/v1alpha3
+apiVersion: networking.istio.io/v1
 kind: DestinationRule
 metadata:
   name: chaos-dashboard

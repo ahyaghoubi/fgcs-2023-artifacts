@@ -22,16 +22,27 @@
 - name: Force sysctl to load settings from all system conf files
   shell: sysctl --system
 
-- name: Download the Google Cloud public signing key
-  apt_key:
-    url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
-    keyring: /usr/share/keyrings/kubernetes-archive-keyring.gpg
+- name: Create directory for Kubernetes APT keyrings
+  file:
+    path: /etc/apt/keyrings
+    state: directory
+    mode: '0755'
+    owner: root
+    group: root
 
-- name: Add the K8s apt repository
+- name: Download the Kubernetes public signing key
+  shell: >
+    curl -fsSL https://pkgs.k8s.io/core:/stable:/v{{ kubernetes_version.split('.')[0] }}.{{ kubernetes_version.split('.')[1] }}/deb/Release.key |
+    gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+  args:
+    creates: /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+
+- name: Add the Kubernetes apt repository
   apt_repository:
-    repo: |
-      deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] 
-      https://apt.kubernetes.io/ kubernetes-xenial main
+    repo: >
+      deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg]
+      https://pkgs.k8s.io/core:/stable:/v{{ kubernetes_version.split('.')[0] }}.{{ kubernetes_version.split('.')[1] }}/deb/
+      /
     filename: kubernetes
     state: present
 
